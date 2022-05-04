@@ -1,22 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../img/logo2.png";
 
 export function SideBar() {
   return (
     <>
       <ul
-        className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"
+        className="navbar-nav sidebar sidebar-dark accordion"
+        style={{ background: "#1c9a37" }}
         id="accordionSidebar"
       >
         <a
           className="sidebar-brand d-flex align-items-center justify-content-center"
           href="index.html"
         >
-          <div className="sidebar-brand-icon rotate-n-15">
-            <i className="fas fa-laugh-wink"></i>
-          </div>
-          <div className="sidebar-brand-text mx-3">
-            SP <sup></sup>
+          <div className="sidebar-brand-icon ">
+            <img
+              src={Logo}
+              alt="Logo"
+              style={{
+                width: "150px",
+                height: "80px",
+              }}
+              className="mt-2 mb-2"
+            />
           </div>
         </a>
 
@@ -103,6 +110,14 @@ export function SideBar() {
             <a className="nav-link">
               <i class="fas fa-taxi"></i>
               <span>Services</span>
+            </a>
+          </li>
+        </Link>
+        <Link to="/users">
+          <li className="nav-item active">
+            <a className="nav-link">
+              <i class="fas fa-users"></i>
+              <span>Users</span>
             </a>
           </li>
         </Link>

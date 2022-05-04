@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { url } from "../../constants/constants";
+import ReactToExcel from "react-html-table-to-excel";
 import axios from "axios";
 const Service = () => {
   const [allServices, setAllServices] = useState([]);
@@ -82,66 +83,80 @@ const Service = () => {
                         <small className="px-1">Services</small>
                       </h6>
                     </div>
-                    <div className="e-table">
-                      <div className="table-responsive table-lg mt-3">
-                        <table className="table table-bordered">
-                          <thead>
-                            <tr>
-                              <th>Name</th>
-                              <th className="max-width">Description</th>
-                              <th className="sortable">Price</th>
-                              <th>Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {allServices !== 0 ? (
-                              allServices.map((data, index) => (
-                                <tr>
-                                  <td className="align-middle text-center">
-                                    <div
-                                      className="bg-light d-inline-flex justify-content-center align-items-center align-top"
-                                      style={{
-                                        width: "35px",
-                                        height: "35px",
-                                        borderRadius: "3px",
-                                      }}
-                                    >
-                                      {data.name}
-                                    </div>
-                                  </td>
-                                  <td className="text-nowrap align-middle">
-                                    {data.description}
-                                  </td>
-                                  {data.price}
-                                  <td className="text-center align-middle">
-                                    <div className="btn-group align-top">
-                                      <button
-                                        className="btn btn-sm btn-outline-secondary badge"
-                                        type="button"
-                                        data-toggle="modal"
-                                        data-target="#user-form-modal"
-                                        onClick={update(data)}
+                    <div className="card card-table">
+                      <div className="card-body">
+                        <div className="table-responsive">
+                          {" "}
+                          <ReactToExcel
+                            className="btn btn-success m-2"
+                            table="dayly-report"
+                            filename="Report"
+                            buttonText="Report"
+                          />
+                          <table
+                            className="table table-stripped bg-light table-hover datatable"
+                            id="dayly-report"
+                          >
+                            <thead className="thead bg-success text-light">
+                              <tr>
+                                <th>Name</th>
+                                <th className="max-width">Description</th>
+                                <th className="sortable">Price</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {allServices !== 0 ? (
+                                allServices.map((data, index) => (
+                                  <tr>
+                                    <td className="align-middle text-center">
+                                      <div
+                                        className="bg-light d-inline-flex justify-content-center align-items-center align-top"
+                                        style={{
+                                          width: "35px",
+                                          height: "35px",
+                                          borderRadius: "3px",
+                                        }}
                                       >
-                                        Edit
-                                      </button>
-                                      <button
-                                        className="btn btn-sm btn-outline-secondary badge"
-                                        type="button"
-                                      >
-                                        <i
-                                          onClick={() => handleDelete(data._id)}
-                                          className="fa fa-trash"
-                                        ></i>
-                                      </button>
-                                    </div>
-                                  </td>
-                                </tr>
-                              ))
-                            ) : (
-                              <span>no service found</span>
-                            )}
-                          </tbody>
-                        </table>
+                                        {data.name}
+                                      </div>
+                                    </td>
+                                    <td className="text-nowrap align-middle">
+                                      {data.description}
+                                    </td>
+                                    {data.price}
+                                    <td className="text-center align-middle">
+                                      <div className="btn-group align-top">
+                                        <button
+                                          className="btn btn-sm btn-outline-secondary badge"
+                                          type="button"
+                                          data-toggle="modal"
+                                          data-target="#user-form-modal"
+                                          onClick={update(data)}
+                                        >
+                                          Edit
+                                        </button>
+                                        <button
+                                          className="btn btn-sm btn-outline-secondary badge"
+                                          type="button"
+                                        >
+                                          <i
+                                            onClick={() =>
+                                              handleDelete(data._id)
+                                            }
+                                            className="fa fa-trash"
+                                          ></i>
+                                        </button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ))
+                              ) : (
+                                <span>no service found</span>
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
